@@ -10,6 +10,8 @@ function escape_html($val){
 function check_login($conn, $url){
     if(!isset($_SESSION['fb_access_token']) && !isset($_SESSION['google_access_token'])){
         return false;
+    } else if(!isset($_SESSION['treestories_user_id'])){
+        return false;
     } else {
         if(isset($_SESSION['fb_access_token'])){
             $userNode = get_fb_info();
@@ -29,7 +31,7 @@ function check_login($conn, $url){
 }
 
 function check_admin($conn, $url){
-    if(check_login($conn, $url)){
+    if(check_login($conn, $url) == true){
         $sql = "SELECT user_id, name, is_admin FROM users WHERE is_admin=1";
         $result = $conn->prepare($sql);
         $result->execute();
@@ -51,6 +53,10 @@ function check_admin($conn, $url){
         } else {
             return true;
         }
+    } else {
+        setcookie('message', 'ERROR: You do not have permission to go there. This attempt has been recorded', time() + 10, '/');
+        header("Location: ".BASE_DIR."list.php");
+
     }
 }
 
