@@ -1,5 +1,5 @@
 <?php
-
+require_once('connections.php');
 session_start();
 session_regenerate_id(true);
 unset($_SESSION['fb_access_token']);
