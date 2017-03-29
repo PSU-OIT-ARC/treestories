@@ -4,7 +4,7 @@
 require_once('helpers.php');
 require_once('connections.php');
 require_once('facebook-php-sdk-v4/src/Facebook/autoload.php');
-require_once('google-api-php-client/src/Google/autoload.php');
+require_once('google-api-php-client/autoload.php');
 
 $page = rtrim($page, "/");
 
