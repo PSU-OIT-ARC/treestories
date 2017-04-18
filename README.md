@@ -9,10 +9,22 @@ Edit the paths shown in the file and restart the service.
     vi /etc/httpd/vhost.d/treestories.conf
     service httpd restart
 
-You will also need to copy the database schema, and will have to get the tree data
-from the server.
-
+You will also need to load the database schema.
     mysqld treestories < treestories.sql
+
+## DOCKER installation and serving
+A DockerFile and docker-compose file are provided. To build a php
+webserver container and a db container run:
+
+    docker-compose up
+
+This will build and launch the containers, load the db schema, and run a
+development PHP server on port 8000 (localhost:8000)
+
+## Tree Data
+You will need to copy the GEOJson files from the server in order to
+serve the tree data.
+
     mkdir data && cd data
     wget -r --no-parent https://climatecope.research.pdx.edu/cs/data/
 
